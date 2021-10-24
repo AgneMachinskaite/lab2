@@ -1,0 +1,90 @@
+'''Задача №1'''
+"""
+def func1_1():
+    var = int(input("Введите число:"))
+    l = list(str(var))
+    k = 0
+    for i in range(len(l)//2):
+        if l[i] == l[-i-1]:
+            k = k + 1
+    if k == len(l)//2:
+        print('True')
+        return True
+    else:
+        print('False')
+        return False
+func1_1()
+'''Задача №2'''
+def func1_2():
+    list_all = list(map(int, input().split()))
+    list1 = []
+    list2 = []
+    list3 = []
+    for i in range(len(list_all)):
+        if list_all[i] % 2 == 0:
+            list1.append(list_all[i])
+        if list_all[i] % 3 == 0:
+            list2.append(list_all[i])
+        if list_all[i] % 5 == 0:
+            list3.append(list_all[i])
+    return list1, list2, list3
+print(func1_2())
+'''Задача №3'''
+def func1_3():
+    var = int(input())
+    list_var = list(str(abs(var)))
+    var_output = []
+    for i in range(len(list_var)-1, -1, -1):
+        var_output.append(list_var[i])
+    if var > 0:
+        return int("".join(map(str, var_output)))
+    else:
+        return -int("".join(map(str, var_output)))
+print(func1_3())
+'''Задача №4'''
+def func2_1():
+    n = int(input())
+    k = 0
+    approx = n / 2
+    closer = (approx + n / approx) / 2
+    while closer != approx:
+        approx = closer
+        closer = (approx + n / approx) / 2
+        k = k + 1
+    return approx
+print(func2_1())
+'''Задача №5'''
+def func2_2():
+    var = int(input())
+    k = 0
+    for i in range(1, var+1):
+        if var % i == 0:
+            k = k + 1
+    if k == 2:
+        return True
+    else:
+        return False
+    
+print(func2_2())"""
+
+'''Задача №6'''
+list_sum = {0: 0, 1: 1, 2: 1}
+
+def func_dec(func):
+    def wrapper(*args):
+        global list_sum
+        if args[0] in list_sum:
+            return list_sum[args[0]]
+        value = func(*args)
+        list_sum[args[0]] = value
+        return value
+    return wrapper
+
+@func_dec
+def func_sum(n):
+    if n in list_sum:
+        return list_sum[n]
+    return func_sum(n-1) + func_sum(n-2)
+
+print(func_sum(10))
+
